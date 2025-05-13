@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Edit Product</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body>
+  <h1>Edit Product</h1>
+  <form method="POST">
+    <label for="product_name">Product Name</label>
+    <input type="text" name="product_name" value="{{ product['name'] }}" required />
+
+    <label for="available_stock">Available Stock</label>
+    <input type="number" name="available_stock" value="{{ product['available_stock'] }}" required />
+
+    <label for="minimum_stock_required">Minimum Stock Required</label>
+    <input type="number" name="minimum_stock_required" value="{{ product['minimum_stock_required'] }}" required />
+
+    <button type="submit">Update Product</button>
+    <a href="/" class="back-btn">Cancel</a>
+  </form>
+</body>
+</html>

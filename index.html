@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smart Inventory Management System</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
+  <style>
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: #f4f9ff;
+      margin: 0;
+      padding: 20px;
+      color: #333;
+    }
+
+    h1 {
+      text-align: center;
+      color: #1e3a8a;
+      margin-bottom: 30px;
+    }
+
+    form {
+      max-width: 500px;
+      margin: 0 auto 30px;
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+      color: #1e3a8a;
+    }
+
+    input[type="text"],
+    input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #cbd5e0;
+      border-radius: 8px;
+      margin-top: 5px;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #1e40af;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #3b82f6;
+    }
+
+    table {
+      width: 90%;
+      margin: 0 auto;
+      border-collapse: collapse;
+      background-color: #ffffff;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    th, td {
+      padding: 15px;
+      text-align: center;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    th {
+      background-color: #1d4ed8;
+      color: white;
+    }
+
+    tr:hover {
+      background-color: #f1f5f9;
+    }
+
+    .actions a {
+      margin: 0 5px;
+      color: #1d4ed8;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .actions a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <h1>Smart Inventory Management System</h1>
+
+  <form method="POST" action="/add">
+    <label for="product_name">Product Name</label>
+    <input type="text" name="product_name" required />
+
+    <label for="available_stock">Available Stock</label>
+    <input type="number" name="available_stock" required />
+
+    <label for="minimum_stock_required">Minimum Stock Required</label>
+    <input type="number" name="minimum_stock_required" required />
+
+    <button type="submit">Add Product</button>
+  </form>
+
+  <table>
+    <tr>
+      <th>Product Name</th>
+      <th>Available Stock</th>
+      <th>Minimum Stock Required</th>
+      <th>Action</th>
+    </tr>
+    {% for product in products %}
+  <tr>
+    <td>{{ product.product_name }}</td>
+    <td>{{ product.available_stock }}</td>
+    <td>{{ product.minimum_stock_required }}</td>
+    <td class="actions">
+      <a href="/edit/{{ product.id }}">Edit</a>
+      <a href="/delete/{{ product.id }}" onclick="return confirm('Are you sure?')">Delete</a>
+    </td>
+  </tr>
+{% endfor %}
+
+  </table>
+</body>
+</html>
